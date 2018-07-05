@@ -61,6 +61,36 @@ function compare_dirs(){
     
     
 }
+
+function same_dir(){
+    # don't print if only one file has that size
+    # want to print out the size, then all files with that size
+
+    # for each size in directory, print a list of all other files with that size
+    for file in "$dir1"/*; do
+	size_to_find=`du -k "$file" | cut -f1`
+	echo "Files with size: " $size_to_find
+	# establish range for which a file is "duplicate"
+	tollerance="0"
+	upper_limit="$(($size_to_find + $tollerance))"
+	lower_limit="$(($size_to_find - $tollerance))"
+	files_with_size=()
+	
+	# if the size is within tollerance, print it
+	for f in "$dir1"/*; do
+	    file_size=`du -k "$f" | cut -f1`
+	    #if [[ ( ! "$size_to_find" > "$lower_limit" ) && ( ! "$size_to_find" < "$upper_limit" ) ]]; then
+	    if [[ ( "$size_to_find" == "$file_size" ) ]]; then
+		echo `du -k "$file"`
+		echo `du -k "$f"`
+	    fi
+	done
+    done
+    
+
+}
+
+
 # main
 
 # first argument is the file directory
@@ -79,6 +109,6 @@ dir2=$2
 
 
 #get_sizes
-compare_dirs
-
+#compare_dirs
+same_dir
 
