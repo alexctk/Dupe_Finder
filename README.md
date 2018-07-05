@@ -2,9 +2,11 @@
 A bash script to find duplicate files
 
 Usage:
-  - Run the script as ./filesizes.sh directory_1 directory_2
+  - compare_dirs: Run the script as ./filesizes.sh directory_1 directory_2
+  - same_dir: run as ./filesizes.sh directory_1
 
 Future plans:
   - Size tollerance alone can result in false positives, or false negatives. Need to consider other parameters
+  - Implement a machine learning approach: use some similarity factor to compare images/frame of video
   - Needs to be optimized to improve running time
   - Complete the original goal of finding duplicate files under different names in the same directory
